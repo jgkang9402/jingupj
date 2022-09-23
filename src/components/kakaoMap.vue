@@ -35,7 +35,7 @@ export default {
 
       this.map = new kakao.maps.Map(container, options);
 		},
-	},
+	}, 
 
 	mounted() {
 		console.log(process.env.VUE_APP_KAKAOMAP_KEY)

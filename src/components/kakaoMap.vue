@@ -10,6 +10,16 @@ export default {
   name: 'KakaoMap',
   components: {
   },
+	props: {
+		latitude : {
+			type : Number,
+			default : 33.450701
+		},
+		longitude : {
+			type : Number,
+			default : 126.570667
+		},
+	},
 	data() {
 		return{
 			address : '서울시 용산구 백범로99길 40',
@@ -19,8 +29,8 @@ export default {
 		initMap() {
       const container = document.getElementById("map");
       const options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 5,
+        center: new kakao.maps.LatLng(this.latitude, this.longitude),
+        level: 4,
       };
 
       this.map = new kakao.maps.Map(container, options);
@@ -36,7 +46,7 @@ export default {
     /* global kakao */
     script.onload = () => kakao.maps.load(this.initMap);
     script.src =
-      `//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed0ea29c5216b90c911a0200d44c637&autoload=false`;
+      `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.VUE_APP_KAKAOMAP_KEY}&autoload=false`;
     document.head.appendChild(script);
   }
 	},

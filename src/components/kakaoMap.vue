@@ -1,7 +1,7 @@
 <template>
-  <div id="map">
-		asd
-  </div>
+  <div>
+		<div id="map"></div>
+	</div>
 </template>
 
 <script>
@@ -13,16 +13,21 @@ export default {
 	props: {
 		latitude : {
 			type : Number,
-			default : 33.450701
+			default : 35.450701
 		},
 		longitude : {
 			type : Number,
 			default : 126.570667
 		},
+
+		content : {
+			type : String,
+			default : '상세지역'
+		}
 	},
 	data() {
 		return{
-			address : '서울시 용산구 백범로99길 40',
+			map:'',
 		}
 	},
 	methods : {
@@ -34,8 +39,24 @@ export default {
       };
 
       this.map = new kakao.maps.Map(container, options);
+			const markerPosition  = new kakao.maps.LatLng(this.latitude, this.longitude); 
+
+			const marker = new kakao.maps.Marker({position: markerPosition});
+
+			marker.setMap(this.map);
+
+			const iwContent = this.content,
+    iwPosition = new kakao.maps.LatLng(this.latitude, this.longitude); 
+
+		const infowindow = new kakao.maps.InfoWindow({
+    position : iwPosition, 
+    content : iwContent 
+});
+  
+infowindow.open(this.map, marker); 
 		},
-	}, 
+	},
+
 
 	mounted() {
 		console.log(process.env.VUE_APP_KAKAOMAP_KEY)
@@ -59,11 +80,10 @@ export default {
 
 
 
-
-
 <style>
 	#map {
-  width: 400px;
-  height: 400px;
+  width: 100%;
+  height: 35rem;
+	border-radius: 30px;
 }
 </style>

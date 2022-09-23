@@ -15,7 +15,7 @@ export default {
   methods: {
 		...mapActions(['actionLogin']),
 
-	async test(){
+	test(){
 		this.actionLogin().then((data) => console.log(data));
 	},
   },

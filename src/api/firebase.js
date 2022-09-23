@@ -1,11 +1,12 @@
-import firebase from 'firebase/compat/app'
+import { initializeApp } from 'firebase/app';
+
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_FIREBASE_KEY,
-  authDomain: "mobile-invitation-95790.firebaseapp.com",
-  projectId: "mobile-invitation-95790",
+  authDomain: "jeju-4f5b1.firebaseapp.com",
+  projectId: "jeju-4f5b1",
 };
 
 // Initialize Firebase
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig);
 export default firebaseApp;

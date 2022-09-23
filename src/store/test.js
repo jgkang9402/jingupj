@@ -8,7 +8,7 @@ export default {
   mutations: {
   },
   actions: {
-		actionTest(){
+		async actionTest(){
 			console.log(123)
 			testApi.testFunc(123)
 		}

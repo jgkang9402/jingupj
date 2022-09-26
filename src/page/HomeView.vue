@@ -11,16 +11,28 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'HomeView',
+  data() {
+		return {
+			visitList : []
+		}
+	},
   components: {
     GnbComp,
   },
   methods: {
     ...mapActions(['actionTest']),
-    ...mapGetters(['getUserInfo'])
+    ...mapGetters(['getUserInfo', 'getVisitList'])
   },
-  created() {
-    this.actionTest()
-    console.log(this.getUserInfo())
+  async created() {
+    const param = {
+				apiKey :  process.env.VUE_APP_VISITJEJU_KEY,
+				locale : 'kr',
+				category : 'c1',
+				page : '1',
+			}
+    await this.actionTest(param)
+    this.visitList = this.getVisitList()
+    console.log(this.visitList)
   },
 };
 </script>

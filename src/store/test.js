@@ -3,20 +3,27 @@ import loginApi from '../api/loginApi'
 
 export default {
   state: {
-    loginKey : ''
+    loginKey : '',
+    visitList : [],
   },
   getters: {
-    getUserInfo: (state) => state.loginKey
+    getUserInfo: (state) => state.loginKey,
+    getVisitList: (state) => state.visitList
   },
   mutations: {
     setUserInfo(state, payload){
-      state.loginKey = payload
+      state.loginKey = payload;
+    },
+    setVisitList(state, payload){
+      state.visitList = payload;
     }
   },
   actions: {
-		actionTest(){
-			console.log(123)
-			testApi.testFunc(123)
+		async actionTest(context, params){
+      const { commit } = context;
+      const result = await testApi.testFunc(params);
+      commit('setVisitList', result.items);
+      return result
 		},
     async actionLogin(){
       const userInfo = await loginApi.login();

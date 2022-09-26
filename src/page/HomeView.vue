@@ -7,7 +7,7 @@
 <script>
 // @ is an alias to /src
 import GnbComp from '@/components/GnbComp.vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'HomeView',
@@ -16,9 +16,11 @@ export default {
   },
   methods: {
     ...mapActions(['actionTest']),
+    ...mapGetters(['getUserInfo'])
   },
   created() {
     this.actionTest()
+    console.log(this.getUserInfo())
   },
 };
 </script>

@@ -6,16 +6,25 @@ export default {
     loginKey : ''
   },
   getters: {
+    getUserInfo: (state) => state.loginKey
   },
   mutations: {
+    setUserInfo(state, payload){
+      state.loginKey = payload
+    }
   },
   actions: {
 		actionTest(){
 			console.log(123)
 			testApi.testFunc(123)
 		},
-    actionLogin(){
-      loginApi.login();
+    async actionLogin(){
+      const userInfo = await loginApi.login();
+      return userInfo.user.uid
+    },
+    async actionLogout(){
+      const userInfo = await loginApi.logout();
+      return userInfo
     }
   }
 };

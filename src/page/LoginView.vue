@@ -1,24 +1,41 @@
 <template>
   <div class="login">
-		<button @click="test">loginBtn</button>
+		<button v-if="!this.userInfo" @click="login">google LoginBtn</button>
+		<button v-else @click="logout">logoutBtn</button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import { mapActions } from 'vuex';
+import { mapActions, mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'HomeView',
+	data() {
+		return {
+			userInfo : ''
+		}
+	},
   components: {
   },
   methods: {
-		...mapActions(['actionLogin']),
+		...mapActions(['actionLogin', 'actionLogout']),
+		...mapMutations(['setUserInfo']),
+		...mapGetters(['getUserInfo']),
 
-	test(){
-		this.actionLogin().then((data) => console.log(data));
+	async login(){
+		await this.actionLogin().then((data) => this.setUserInfo(data));
+		this.userInfo = this.getUserInfo()
 	},
-  },
+
+	async logout(){
+		await this.actionLogout().then((data) => this.setUserInfo(data));
+		this.userInfo = this.getUserInfo()
+	},
+
+
+},
+	
 
 };
 </script>

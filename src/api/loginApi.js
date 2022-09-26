@@ -6,5 +6,9 @@ export default {
 	async login(){
 		const authProvider = new firebase.auth.GoogleAuthProvider();
     return firebaseApp.auth().signInWithPopup(authProvider);
-		}
+		},
+
+	async logout(){
+		firebase.auth().signOut();
+	}
 };
